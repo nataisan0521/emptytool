@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+require "thor"
+
+class EmptyTool < Thor
+  default_command :create
+  desc 'create', 'Empry File Create'
+  def create
+    (1..10).each do |idx|
+      if File.exist?("./hoge_#{idx}") == false
+        File.open("./hoge_#{idx}", "w").close()
+        puts "Create hoge_#{idx}"
+      else
+        puts "hoge_#{idx} exists"
+      end
+    end
+  end
+  desc 'delete' , 'Hoge File delete'
+  def delete
+    (1..10).each do |delidx|
+      if File.exist?("./hoge_#{delidx}")
+        File.unlink("./hoge_#{delidx}")
+        puts "Delete hoge_#{delidx}"
+      else
+        puts "hoge_#{delidx} does not exists"
+      end
+    end
+  end
+end
+
+EmptyTool.start
